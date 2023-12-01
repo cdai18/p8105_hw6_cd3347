@@ -32,7 +32,7 @@ set.seed(1)
 
 # Problem 2
 
-###Importing weather data:
+### Importing weather data:
 
 ```{r}
 weather_df = 
@@ -53,7 +53,7 @@ weather_df =
 ```{r}
 weather_boot_results = 
   weather_df %>% 
-    bootstrap(1000, id = "strap_number") %>% 
+    bootstrap(5000, id = "strap_number") %>% 
     mutate(
       models = map(strap, ~lm(tmax ~ tmin + prcp, data = .x)),
       results_r2 = map(models, broom::glance),
@@ -97,7 +97,7 @@ weather_boot_results %>%
   labs(title = "log(beta_1 * beta2) distribution")
 ```
 
-This distribution is heavily left-skewed, with a long tail from about -13 to around -6.5, when it evens out more. The most values are concentrated around -6 to -5.
+This distribution is heavily left-skewed, with a long tail from about -13 to around -6.5, when it evens out more. The most values are concentrated around -6.5 to -5.
 
 
 ### 95% confidence intervals for both estimates
@@ -118,9 +118,19 @@ weather_boot_results %>%
 ```
 
 
-The 95% CI for the r_squared estimates is (0.889, 0.940). The 95% CI for the log(beta_1 * beta_2) is (-9.43, -4.52). This aligns with the plots.
+The 95% CI for the r_squared estimates is (0.889, 0.940). The 95% CI for the log(beta_1 * beta_2) is (-9.21, -4.58). This aligns with the plots.
 
 
+# Problem 3
+
+Loading data and cleaning it:
+
+```{r}
+birthweight_df = 
+  read_csv("./data/birthweight.csv") %>% 
+  
+
+```
 
 
 
